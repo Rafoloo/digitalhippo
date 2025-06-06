@@ -1,62 +1,83 @@
-import MaxWidhtWrapper from '@/components/MaxWidhtWrapper'
-import { Button, buttonVariants } from '@/components/ui/button'
-import { CheckCircle, Leaf, ShoppingCart } from 'lucide-react'
+import MaxWidthWrapper from '@/components/MaxWidthWrapper'
+import ProductReel from '@/components/ProductReel'
+import {
+  Button,
+  buttonVariants,
+} from '@/components/ui/button'
+import {
+  ArrowDownToLine,
+  CheckCircle,
+  Leaf,
+} from 'lucide-react'
 import Link from 'next/link'
 
 const perks = [
   {
-    name: 'Delivery Instantâneo',
-    Icon: ShoppingCart,
-    description: 'Receba a confirmação do seu pedido por e-mail em segundos.',
+    name: 'Entrega Instantânea',
+    Icon: ArrowDownToLine,
+    description:
+      'Receba seus arquivos em seu email em segundos e faça o download imediatamente.',
   },
   {
     name: 'Qualidade Garantida',
     Icon: CheckCircle,
-    description: 'Todos os produtos passam por uma rigorosa verificação de qualidade.',
+    description:
+      'Todos os arquivos em nossa plataforma são verificados por nossa equipe para garantir os mais altos padrões de qualidade. Não ficou satisfeito? Oferecemos garantia de reembolso de 30 dias.',
   },
   {
-    name: 'Pelo Planeta',
+    name: 'Para o Planeta',
     Icon: Leaf,
-    description: 'Nossos produtos são selecionados com responsabilidade ambiental em mente.',
+    description:
+      'Nós nos comprometemos a doar 1% das vendas para a preservação e restauração do meio ambiente.',
   },
-
 ]
 
 export default function Home() {
   return (
     <>
-      <MaxWidhtWrapper>
-        <div className="py-20 mx-auto text-center flex flex-col items-center max-w-3xl">
+      <MaxWidthWrapper>
+        <div className='py-20 mx-auto text-center flex flex-col items-center max-w-3xl'>
           <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
-            Produtos de alta qualidade, direto pra{' '}
+            Seu marketplace para{' '}
             <span className='text-violet-600'>
-              você
+              arquivos digitais
             </span>
-            .
+            {' '}de alta qualidade.
           </h1>
-          <p className="mt-6 text-lg max-w-prose text-muted-foreground">
-            Bem-vindo(a) à DigitalHippo. Aqui, a qualidade é garantida, nossa
-            equipe verifica cada item para os mais altos padrões.
+          <p className='mt-6 text-lg max-w-prose text-muted-foreground'>
+            Bem-vindo ao DigitalHippo. Todos os arquivos em nossa
+            plataforma são verificados por nossa equipe para garantir os
+            mais altos padrões de qualidade.
           </p>
           <div className='flex flex-col sm:flex-row gap-4 mt-6'>
-            <Link href="/products" className={buttonVariants()}>Navegar pelas Tendências</Link>
-            <Button variant="ghost">Conheça nossos padrões de qualidade &rarr;</Button>
+            <Link
+              href='/products'
+              className={buttonVariants()}>
+              Explorar Tendências
+            </Link>
+            <Button variant='ghost'>
+              Nossa garantia de qualidade &rarr;
+            </Button>
           </div>
         </div>
 
-        {/*TODO: lista de produtos */}
-      </MaxWidhtWrapper>
+        <ProductReel
+          query={{ sort: 'desc', limit: 4 }}
+          href='/products?sort=recent'
+          title='Novidades'
+        />
+      </MaxWidthWrapper>
 
       <section className='border-t border-gray-200 bg-gray-50'>
-        <MaxWidhtWrapper className='py-20'>
-          <div className='grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-8 lg-gap-y-0'>
+        <MaxWidthWrapper className='py-20'>
+          <div className='grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-0'>
             {perks.map((perk) => (
               <div
                 key={perk.name}
                 className='text-center md:flex md:items-start md:text-left lg:block lg:text-center'>
                 <div className='md:flex-shrink-0 flex justify-center'>
                   <div className='h-16 w-16 flex items-center justify-center rounded-full bg-violet-100 text-violet-900'>
-                    {<perk.Icon className='h-1/3 w-1/3' />}
+                    {<perk.Icon className='w-1/3 h-1/3' />}
                   </div>
                 </div>
 
@@ -71,7 +92,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </MaxWidhtWrapper>
+        </MaxWidthWrapper>
       </section>
     </>
   )
